@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BowlingGameKata\BowlingGame20170504.cs" />
+    <Compile Include="CompareTripletsKata\CompareTriplets0505.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
