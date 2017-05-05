@@ -28,6 +28,18 @@
       <NamedTestSelector>
         <TestName>CodeKatas.CompareTripletsKata.CompareTriplets0505.ShouldScoreBothSides</TestName>
       </NamedTestSelector>
+      <NamedTestSelector>
+        <TestName>CodeKatas.FizzBuzzKata.FizzBuzz0505.ShouldTakeNumberAndReturnAsString</TestName>
+      </NamedTestSelector>
+      <NamedTestSelector>
+        <TestName>CodeKatas.FizzBuzzKata.FizzBuzz0505.ShouldReturnFizzForMultipleOf3</TestName>
+      </NamedTestSelector>
+      <NamedTestSelector>
+        <TestName>CodeKatas.FizzBuzzKata.FizzBuzz0505.ShouldReturnBuzzForMultipleOf5</TestName>
+      </NamedTestSelector>
+      <NamedTestSelector>
+        <TestName>CodeKatas.FizzBuzzKata.FizzBuzz0505.ShouldReturnFizzBuzzFor15</TestName>
+      </NamedTestSelector>
     </IgnoredTests>
     <PreviouslyBuiltSuccessfully>True</PreviouslyBuiltSuccessfully>
   </Settings>
