@@ -1,46 +1,5 @@
 ﻿<ProjectConfiguration>
   <Settings>
-    <IgnoredTests>
-      <NamedTestSelector>
-        <TestName>CodeKatas.BowlingGameKata.BowlingGame20170504.ShouldScoreGutterGame</TestName>
-      </NamedTestSelector>
-      <NamedTestSelector>
-        <TestName>CodeKatas.BowlingGameKata.BowlingGame20170504.ShouldScoreAllOnes</TestName>
-      </NamedTestSelector>
-      <NamedTestSelector>
-        <TestName>CodeKatas.BowlingGameKata.BowlingGame20170504.ShouldScoreSpare</TestName>
-      </NamedTestSelector>
-      <NamedTestSelector>
-        <TestName>CodeKatas.BowlingGameKata.BowlingGame20170504.ShouldScoreStrike</TestName>
-      </NamedTestSelector>
-      <NamedTestSelector>
-        <TestName>CodeKatas.BowlingGameKata.BowlingGame20170504.ShouldScorePerfectGame</TestName>
-      </NamedTestSelector>
-      <NamedTestSelector>
-        <TestName>CodeKatas.CompareTripletsKata.CompareTriplets0505.ShouldScoreBothTied</TestName>
-      </NamedTestSelector>
-      <NamedTestSelector>
-        <TestName>CodeKatas.CompareTripletsKata.CompareTriplets0505.ShouldScoreWinnerA</TestName>
-      </NamedTestSelector>
-      <NamedTestSelector>
-        <TestName>CodeKatas.CompareTripletsKata.CompareTriplets0505.ShouldScoreWinnerB</TestName>
-      </NamedTestSelector>
-      <NamedTestSelector>
-        <TestName>CodeKatas.CompareTripletsKata.CompareTriplets0505.ShouldScoreBothSides</TestName>
-      </NamedTestSelector>
-      <NamedTestSelector>
-        <TestName>CodeKatas.FizzBuzzKata.FizzBuzz0505.ShouldTakeNumberAndReturnAsString</TestName>
-      </NamedTestSelector>
-      <NamedTestSelector>
-        <TestName>CodeKatas.FizzBuzzKata.FizzBuzz0505.ShouldReturnFizzForMultipleOf3</TestName>
-      </NamedTestSelector>
-      <NamedTestSelector>
-        <TestName>CodeKatas.FizzBuzzKata.FizzBuzz0505.ShouldReturnBuzzForMultipleOf5</TestName>
-      </NamedTestSelector>
-      <NamedTestSelector>
-        <TestName>CodeKatas.FizzBuzzKata.FizzBuzz0505.ShouldReturnFizzBuzzFor15</TestName>
-      </NamedTestSelector>
-    </IgnoredTests>
     <PreviouslyBuiltSuccessfully>True</PreviouslyBuiltSuccessfully>
   </Settings>
 </ProjectConfiguration>
