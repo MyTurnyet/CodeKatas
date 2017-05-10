@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Text;
-using System.Collections.Generic;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace CodeKatas.FibonnacciKata
+namespace CodeKatas.FibbonacciKata
 {
     //Takes an number
     //returns sum of previous numbers: 

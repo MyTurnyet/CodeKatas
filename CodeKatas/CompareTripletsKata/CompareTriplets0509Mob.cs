@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -101,10 +100,10 @@ namespace CodeKatas.CompareTripletsKata
             int winsForB = 0;
             for (int i = 0; i < scoresForPersonA.Count; i++)
             {
-                int PersonAScore = scoresForPersonA[i];
-                int  PersonBScore = scoresForPersonB[i];
-                if (PersonAScore > PersonBScore) winsForA++;
-                if (PersonBScore > PersonAScore) winsForB++;
+                int personAScore = scoresForPersonA[i];
+                int  personBScore = scoresForPersonB[i];
+                if (personAScore > personBScore) winsForA++;
+                if (personBScore > personAScore) winsForB++;
 
             }
             return $"{winsForA} {winsForB}";

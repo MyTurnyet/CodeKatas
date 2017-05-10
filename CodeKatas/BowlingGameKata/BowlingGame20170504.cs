@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -16,7 +14,7 @@ namespace CodeKatas.BowlingGameKata
             BowlingGame game = new BowlingGame();
 
             //act
-            int score = game.TotalScore(new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 });
+            int score = game.TotalScore(new[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 });
             //assert
             score.Should().Be(0);
         }
@@ -27,7 +25,7 @@ namespace CodeKatas.BowlingGameKata
             BowlingGame game = new BowlingGame();
 
             //act
-            int score = game.TotalScore(new int[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 });
+            int score = game.TotalScore(new[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 });
             //assert
             score.Should().Be(20);
         }
@@ -39,7 +37,7 @@ namespace CodeKatas.BowlingGameKata
             BowlingGame game = new BowlingGame();
 
             //act
-            int score = game.TotalScore(new int[] { 5, 5, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 });
+            int score = game.TotalScore(new[] { 5, 5, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 });
             //assert
             score.Should().Be(16);
 
@@ -51,7 +49,7 @@ namespace CodeKatas.BowlingGameKata
             BowlingGame game = new BowlingGame();
 
             //act
-            int score = game.TotalScore(new int[] { 10, 3, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 });
+            int score = game.TotalScore(new[] { 10, 3, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 });
             //assert
             score.Should().Be(24);
 
@@ -63,7 +61,7 @@ namespace CodeKatas.BowlingGameKata
             BowlingGame game = new BowlingGame();
 
             //act
-            int score = game.TotalScore(new int[] { 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10 });
+            int score = game.TotalScore(new[] { 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10 });
             //assert
             score.Should().Be(300);
 
