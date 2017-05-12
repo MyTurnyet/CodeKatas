@@ -35,10 +35,10 @@ namespace CodeKatas.FizzBuzzKata
         }
 
         [TestMethod, TestCategory("Unit")]
-        public void ShouldReturnFizzBuzzFor15()
+        public void ShouldReturnFizzBuzzForMultiple15()
         {
             //act
-            string actualValue = CalculateFizzBuzz(15);
+            string actualValue = CalculateFizzBuzz(45);
             //assert
             actualValue.Should().Be("fizzbuzz");
         }
