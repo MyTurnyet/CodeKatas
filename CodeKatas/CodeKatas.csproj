@@ -64,6 +64,7 @@
     <Compile Include="FizzBuzzKata\FizzBuzz0505.cs" />
     <Compile Include="FizzBuzzKata\Fizzbuzz0510.cs" />
     <Compile Include="FizzBuzzKata\FizzBuzz0510a.cs" />
+    <Compile Include="FizzBuzzKata\FizzbuzzPaired0512.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringTowerKata\StringTower0510.cs" />
   </ItemGroup>
