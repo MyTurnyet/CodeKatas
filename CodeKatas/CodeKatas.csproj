@@ -60,6 +60,7 @@
     <Compile Include="CompareTripletsKata\CompareTriplets0505.cs" />
     <Compile Include="CompareTripletsKata\CompareTriplets0509Mob.cs" />
     <Compile Include="FibbonacciKata\FibbonacciTests0505.cs" />
+    <Compile Include="FibbonacciKata\Fibbonacci0512.cs" />
     <Compile Include="FizzBuzzKata\FizzBuzz0505.cs" />
     <Compile Include="FizzBuzzKata\Fizzbuzz0510.cs" />
     <Compile Include="FizzBuzzKata\FizzBuzz0510a.cs" />
