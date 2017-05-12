@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -21,7 +22,7 @@ namespace CodeKatas.StringTowerKata
         public void ShouldReturnTwoTowerLevels()
         {
             //arrange
-            string[] expectedOutput = new[] { " * ", "***" };
+            string[] expectedOutput = new[] { " * ","***" };
             //act
             string[] actualOutput = CreateTower(2);
             //assert
@@ -31,7 +32,7 @@ namespace CodeKatas.StringTowerKata
         public void ShouldReturnFourTowerLevels()
         {
             //arrange
-            string[] expectedOutput = new[] { "   *   ", "  ***  ", " ***** ", "*******" };
+            string[] expectedOutput = new[] { "   *   ","  ***  "," ***** ","*******" };
             //act
             string[] actualOutput = CreateTower(4);
             //assert
@@ -42,13 +43,11 @@ namespace CodeKatas.StringTowerKata
         private string[] CreateTower(int numberOfFloors)
         {
             List<string> outputList = new List<string>();
-            for (int currentFloorNumber = numberOfFloors; currentFloorNumber >= 1; currentFloorNumber--)
-            {
-                var padSize = PadSize(numberOfFloors, currentFloorNumber);
-                outputList.Insert(0, SpacingString(padSize) + StarString(currentFloorNumber) + SpacingString(padSize));
-            }
+            Enumerable.Range(1, numberOfFloors).Reverse().ToList().ForEach(x=> outputList.Insert(0, AddFloor(x,PadSize(numberOfFloors,x))));
             return outputList.ToArray();
         }
+
+        private string AddFloor(int currentFloorNumber, int padSize)=> SpacingString(padSize) + StarString(currentFloorNumber) + SpacingString(padSize);
         private string StarString(int currentFloorNumber) => "".PadRight(StarCount(currentFloorNumber), '*');
         private string SpacingString(int padSize) => "".PadRight(padSize, ' ');
         private int PadSize(int numberOfFloors, int currentFloorNumber) => numberOfFloors - currentFloorNumber;
