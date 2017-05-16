@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace CodeKatas.BowlingGameKata
 {
     [TestClass]
-    public class BowlingGame20170504
+    public class BowlingGame0504
     {
         [TestMethod, TestCategory("Unit")]
         public void ShouldScoreGutterGame()
