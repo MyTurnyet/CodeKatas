@@ -49,11 +49,6 @@ namespace CodeKatas.FibbonacciKata
             //assert
             actualValue.Should().Be(expectedValue);
         }
-        private int CalculateFibbonacci(int inputValue)
-        {
-            if (inputValue < 0) return 0;
-            if (inputValue == 0 || inputValue == 1) return inputValue;
-            return CalculateFibbonacci(inputValue - 1) + CalculateFibbonacci(inputValue - 2);
-        }
+        private int CalculateFibbonacci(int inputValue) => inputValue < 0 ? 0: (inputValue == 0 || inputValue == 1? inputValue: CalculateFibbonacci(inputValue - 1) + CalculateFibbonacci(inputValue - 2));
     }
 }
