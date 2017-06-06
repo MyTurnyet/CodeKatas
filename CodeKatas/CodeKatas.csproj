@@ -38,6 +38,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="dotMemory.Unit, Version=103.0.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
+      <HintPath>packages\JetBrains.dotMemoryUnit.2.3.20160517.113140\lib\dotMemory.Unit.dll</HintPath>
+    </Reference>
     <Reference Include="FluentAssertions, Version=4.19.2.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
       <HintPath>packages\FluentAssertions.4.19.2\lib\net45\FluentAssertions.dll</HintPath>
     </Reference>
@@ -60,6 +63,7 @@
     <Compile Include="BowlingGameKata\BowlingGame0606.cs" />
     <Compile Include="CompareTripletsKata\CompareTriplets0505.cs" />
     <Compile Include="CompareTripletsKata\CompareTriplets0509Mob.cs" />
+    <Compile Include="CompareTripletsKata\CompareTriplets0606paired.cs" />
     <Compile Include="FibbonacciKata\FibbonacciTests0505.cs" />
     <Compile Include="FibbonacciKata\Fibbonacci0512.cs" />
     <Compile Include="FizzBuzzKata\FizzBuzz0505.cs" />
