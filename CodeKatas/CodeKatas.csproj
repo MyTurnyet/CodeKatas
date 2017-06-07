@@ -64,6 +64,8 @@
     <Compile Include="CompareTripletsKata\CompareTriplets0505.cs" />
     <Compile Include="CompareTripletsKata\CompareTriplets0509Mob.cs" />
     <Compile Include="CompareTripletsKata\CompareTriplets0606paired.cs" />
+    <Compile Include="CompareTripletsKata\CompareTriplets0607.cs" />
+    <Compile Include="CompareTripletsKata\CompareTriplet0607_2.cs" />
     <Compile Include="FibbonacciKata\FibbonacciTests0505.cs" />
     <Compile Include="FibbonacciKata\Fibbonacci0512.cs" />
     <Compile Include="FizzBuzzKata\FizzBuzz0505.cs" />
