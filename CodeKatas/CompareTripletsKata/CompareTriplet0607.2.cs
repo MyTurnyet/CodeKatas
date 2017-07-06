@@ -1,11 +1,10 @@
-﻿using System;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CodeKatas.CompareTripletsKata
 {
     [TestClass]
-    public class CompareTriplet0607_2
+    public class CompareTriplet06072
     {
         [TestMethod, TestCategory("Unit")]
         public void ShouldReturnOneForWinA()
