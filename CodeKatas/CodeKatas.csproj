@@ -82,6 +82,7 @@
     <Compile Include="FizzBuzzKata\FizzBuzzHolly0613.cs" />
     <Compile Include="FizzBuzzKata\FizzBuzzPaired0705Interview.cs" />
     <Compile Include="FizzBuzzKata\FizzBuzzInterns20170801.cs" />
+    <Compile Include="FizzBuzzKata\FizzBuzzOOKata20170807.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringTowerKata\StringTower0510.cs" />
     <Compile Include="StringTowerKata\StringTower0626.cs" />
