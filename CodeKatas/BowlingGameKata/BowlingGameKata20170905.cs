@@ -131,6 +131,32 @@ namespace CodeKatas.BowlingGameKata
             //assert
             actualScore.Should().Be(expectedScore);
         }
+        [TestMethod, TestCategory("Unit")]
+        public void ShouldGetAdditionAllBallScoreForStrikeIn10ThFrame()
+        {
+            //arrange
+            IFrame frame1 = new StrikeFrame();
+            frame1.AddBonusBalls(new BonusBall(10), new BonusBall(5));
+            Score expectedScore = new Score(25);
+            //act
+            Score actualScore = frame1.Score();
+            //assert
+            actualScore.Should().Be(expectedScore);
+        }
+        [TestMethod, TestCategory("Unit")]
+        public void ShouldnotGetBonusBallScoreForStrikeNotIn10ThFrame()
+        {
+            //arrange
+            IFrame frame1 = new StrikeFrame();
+            IFrame frame3 = new RegularFrame(new Ball(3), new Ball(3));
+            frame1.AddNextFrame(frame3);
+            frame1.AddBonusBalls(new BonusBall(10), new BonusBall(5));
+            Score expectedScore = new Score(16);
+            //act
+            Score actualScore = frame1.Score();
+            //assert
+            actualScore.Should().Be(expectedScore);
+        }
         #endregion Frame tests
 
         #region Game tests
@@ -165,43 +191,56 @@ namespace CodeKatas.BowlingGameKata
             actualScore.Should().Be(expectedScore);
         }
 
-        //[TestMethod, TestCategory("Unit")]
-        //public void ShouldScoreGameWithSpare()
-        //{
-        //    //arrange
-        //    Game game = new Game();
-        //    RegularFrame frame1 = new RegularFrame(new Ball(4), new Ball(6));
-        //    RegularFrame frame2 = new RegularFrame(new Ball(3), new Ball(3));
-        //    game.AddFrame(frame1);
-        //    game.AddFrame(frame2);
-        //    AddFramesWithScore(game, 8, 0);
-        //    Score expectedScore = new Score(19);
+        [TestMethod, TestCategory("Unit")]
+        public void ShouldScoreGameWithSpare()
+        {
+            //arrange
+            Game game = new Game();
+            IFrame frame1 = new SpareFrame(new Ball(4), new Ball(6));
+            IFrame frame2 = new RegularFrame(new Ball(3), new Ball(3));
+            game.AddFrame(frame1);
+            game.AddFrame(frame2);
+            AddFramesWithScore(game, 8, 0);
+            Score expectedScore = new Score(19);
 
-        //    //act
-        //    Score actualScore = game.ScoreGame();
+            //act
+            Score actualScore = game.ScoreGame();
 
-        //    //assert
-        //    actualScore.Should().Be(expectedScore);
-        //}
+            //assert
+            actualScore.Should().Be(expectedScore);
+        }
 
-        //[TestMethod, TestCategory("Unit")]
-        //public void ShouldScoreGameWithStrike()
-        //{
-        //    //arrange
-        //    Game game = new Game();
-        //    IFrame strikeFrame = new Strike();
-        //    IFrame frame2 = new RegularFrame(new Ball(3), new Ball(4));
-        //    game.AddFrame(strikeFrame);
-        //    game.AddFrame(frame2);
-        //    AddFramesWithScore(game, 8, 0);
-        //    Score expectedScore = new Score(24);
+        [TestMethod, TestCategory("Unit")]
+        public void ShouldScoreGameWithStrike()
+        {
+            //arrange
+            Game game = new Game();
+            IFrame strikeFrame = new StrikeFrame();
+            IFrame frame2 = new RegularFrame(new Ball(3), new Ball(4));
+            game.AddFrame(strikeFrame);
+            game.AddFrame(frame2);
+            AddFramesWithScore(game, 8);
+            Score expectedScore = new Score(24);
+            //act
+            Score actualScore = game.ScoreGame();
+            //assert
+            actualScore.Should().Be(expectedScore);
+        }
 
-        //    //act
-        //    Score actualScore = game.ScoreGame();
-
-        //    //assert
-        //    actualScore.Should().Be(expectedScore);
-        //}
+        [TestMethod, TestCategory("Unit")]
+        public void ShouldScoreStrikeAtTheEnd()
+        {
+            Game game = new Game();
+            AddFramesWithScore(game, 9, 1);
+            IFrame strikeFrame = new StrikeFrame();
+            strikeFrame.AddBonusBalls(new BonusBall(3), new BonusBall(6));
+            game.AddFrame(strikeFrame);
+            Score expectedScore = new Score(37);
+            //act
+            Score actualScore = game.ScoreGame();
+            //assert
+            actualScore.Should().Be(expectedScore);
+        }
         #endregion Game tests
 
         /// <summary>
@@ -225,6 +264,7 @@ namespace CodeKatas.BowlingGameKata
             bool IsStrike();
             Score Score();
             Score GetBonusScore(IFrame frame);
+            void AddBonusBalls(BonusBall bonusBall1, BonusBall bonusBall2);
         }
 
         private class Game
@@ -255,20 +295,37 @@ namespace CodeKatas.BowlingGameKata
         {
             private IFrame _nextFrame;
             private readonly Ball _ball = new Ball(10);
-            
-            public void AddNextFrame(IFrame nextFrame)
-            {
-                _nextFrame = nextFrame;
-            }
-
+            private BonusBall _bonusBall;
+            private BonusBall _bonusBall2;
+            public void AddNextFrame(IFrame nextFrame) => _nextFrame = nextFrame;
             public bool IsSpare() => false;
             public bool IsStrike() => true;
+            public Score Score()
+            {
+                Score score = AddNextFrameBonus();
+                return _ball.Score() + score;
+            }
 
-            public Score Score() => _ball.Score() + _nextFrame.GetBonusScore(this);
+            private Score AddNextFrameBonus()
+            {
+                if (_nextFrame == null) return BonusBallScore();
+                return _nextFrame.GetBonusScore(this);
+            }
+
+            private Score BonusBallScore()
+            {
+                return _bonusBall.Score() + _bonusBall2.Score();
+            }
 
             public Score GetBonusScore(IFrame frame)
             {
                 throw new NotImplementedException();
+            }
+
+            public void AddBonusBalls(BonusBall bonusBall1, BonusBall bonusBall2)
+            {
+                _bonusBall = bonusBall1;
+                _bonusBall2 = bonusBall2;
             }
         }
         private class SpareFrame : IFrame
@@ -276,18 +333,30 @@ namespace CodeKatas.BowlingGameKata
             private readonly Ball _ball1;
             private readonly Ball _ball2;
             private IFrame _nextFrame;
+            private BonusBall _bonusBall;
+            private BonusBall _bonusBall2;
 
             public SpareFrame(Ball ball1, Ball ball2)
             {
-                if(!Equals(ball1.Score()+ ball2.Score(), new Score(10))) throw new ArgumentException("The score of two balls in rolled in a spare frame must be 10");
+                if (!Equals(ball1.Score() + ball2.Score(), new Score(10))) throw new ArgumentException("The score of two balls in rolled in a spare frame must be 10");
                 _ball1 = ball1;
                 _ball2 = ball2;
             }
 
-            public Score Score() => _ball1.Score() + _ball2.Score() + _nextFrame.GetBonusScore(this);
-            public  Score GetBonusScore(IFrame frame)
+            public Score Score()
+            {
+                return _ball1.Score() + _ball2.Score() + _nextFrame.GetBonusScore(this);
+            }
+
+            public Score GetBonusScore(IFrame frame)
             {
                 throw new NotImplementedException();
+            }
+
+            public void AddBonusBalls(BonusBall bonusBall1, BonusBall bonusBall2)
+            {
+                _bonusBall = bonusBall1;
+                _bonusBall2 = new BonusBall(0);
             }
 
             public bool IsSpare() => true;
@@ -308,6 +377,7 @@ namespace CodeKatas.BowlingGameKata
 
             public Score Score() => _ball1.Score() + _ball2.Score();
             public Score GetBonusScore(IFrame frame) => frame.IsSpare() ? _ball1.Score() : Score();
+            public void AddBonusBalls(BonusBall bonusBall1, BonusBall bonusBall2) { }
             public bool IsSpare() => false;
             public void AddNextFrame(IFrame nextFrame) => _nextFrame = nextFrame;
             public bool IsStrike() => false;
@@ -341,6 +411,10 @@ namespace CodeKatas.BowlingGameKata
             protected bool Equals(Ball other) => _pinsHit == other._pinsHit;
             public override int GetHashCode() => _pinsHit;
             public Score Score() => new Score(_pinsHit);
+        }
+        private class BonusBall : Ball
+        {
+            public BonusBall(int pinsHit) : base(pinsHit) { }
         }
     }
 }
