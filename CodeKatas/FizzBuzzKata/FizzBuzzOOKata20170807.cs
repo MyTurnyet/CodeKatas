@@ -49,98 +49,99 @@ namespace CodeKatas.FizzBuzzKata
          //   actualResult.Equals(expectedResult).Should().BeTrue();
         }
 
-    }
+        private interface IModOperator { }
+        private interface IFizzBuzzResult { }
 
-
-    public interface IModOperator { }
-    public interface IFizzBuzzResult { }
-
-    public interface IFizzBuzzNumber
-    {
-        string AsString();
-        int AsInt();
-    }
-    public interface IFizzBuzz
-    {
-        IFizzBuzzResult Calculate(IFizzBuzzNumber inputNumber);
-    }
-
-    public class FizzResult : FizzBuzzResult
-    {
-        public FizzResult() : base("fizz"){}
-    }
-    public class BuzzResult : FizzBuzzResult
-    {
-        public BuzzResult() : base("buzz"){}
-
-     
-    }
-    public class NumberResult : FizzBuzzResult
-    {
-        public NumberResult(IFizzBuzzNumber inputNumber) : base(inputNumber.AsString()) { }
-    }
-
-    public abstract class FizzBuzzResult : IFizzBuzzResult
-    {
-        private readonly string _origin;
-
-        protected FizzBuzzResult(string origin)
+        private interface IFizzBuzzNumber
         {
-            _origin = origin;
+            string AsString();
+            int AsInt();
         }
-        private bool Equals(FizzBuzzResult other) => other._origin.Equals(this._origin);
-        public override bool Equals(object obj) => obj is FizzBuzzResult && Equals((FizzBuzzResult)obj);
-
-        public virtual void Collect(StringBuilder sb)
+        private interface IFizzBuzz
         {
-            sb.Append(_origin);
+            IFizzBuzzResult Calculate(IFizzBuzzNumber inputNumber);
         }
-    }
 
-
-    public class FizzBuzzNumber : IFizzBuzzNumber
-    {
-        private readonly int _origin;
-
-        public FizzBuzzNumber(int origin)
+        private class FizzResult : FizzBuzzResult
         {
-            _origin = origin;
+            public FizzResult() : base("fizz") { }
         }
-        private bool Equals(FizzBuzzNumber other) => other._origin.Equals(this._origin);
-        public override bool Equals(object obj) => obj is FizzBuzzNumber && Equals((FizzBuzzNumber)obj);
-        public string AsString() => _origin.ToString();
-        public int AsInt()
+        private class BuzzResult : FizzBuzzResult
         {
-            return _origin;
-        }
-    }
+            public BuzzResult() : base("buzz") { }
 
-    public class ModOperator : IModOperator
-    {
-        private readonly IFizzBuzzNumber _inputNumber;
-        private readonly int _mod;
 
-        public ModOperator(IFizzBuzzNumber inputNumber, int mod)
-        {
-            _inputNumber = inputNumber;
-            _mod = mod;
         }
-        public bool Exact() => _inputNumber.AsInt() % _mod == 0;
-    }
-    public class FizzBuzz : IFizzBuzz
-    {
-        public IFizzBuzzResult Calculate(IFizzBuzzNumber inputNumber)
+        private class NumberResult : FizzBuzzResult
         {
-            StringBuilder sb = new StringBuilder();
-            if (new ModOperator(inputNumber, 5).Exact())
+            public NumberResult(IFizzBuzzNumber inputNumber) : base(inputNumber.AsString()) { }
+        }
+
+        private abstract class FizzBuzzResult : IFizzBuzzResult
+        {
+            private readonly string _origin;
+
+            protected FizzBuzzResult(string origin)
             {
-                new BuzzResult().Collect(sb);
-                
+                _origin = origin;
             }
-            if(new ModOperator(inputNumber, 3).Exact()) return new FizzResult();
-            return new NumberResult(inputNumber);
+            private bool Equals(FizzBuzzResult other) => other._origin.Equals(this._origin);
+            public override bool Equals(object obj) => obj is FizzBuzzResult && Equals((FizzBuzzResult)obj);
+
+            public virtual void Collect(StringBuilder sb)
+            {
+                sb.Append(_origin);
+            }
+        }
+
+
+        private class FizzBuzzNumber : IFizzBuzzNumber
+        {
+            private readonly int _origin;
+
+            public FizzBuzzNumber(int origin)
+            {
+                _origin = origin;
+            }
+            private bool Equals(FizzBuzzNumber other) => other._origin.Equals(this._origin);
+            public override bool Equals(object obj) => obj is FizzBuzzNumber && Equals((FizzBuzzNumber)obj);
+            public string AsString() => _origin.ToString();
+            public int AsInt()
+            {
+                return _origin;
+            }
+        }
+
+        private class ModOperator : IModOperator
+        {
+            private readonly IFizzBuzzNumber _inputNumber;
+            private readonly int _mod;
+
+            public ModOperator(IFizzBuzzNumber inputNumber, int mod)
+            {
+                _inputNumber = inputNumber;
+                _mod = mod;
+            }
+            public bool Exact() => _inputNumber.AsInt() % _mod == 0;
+        }
+        private class FizzBuzz : IFizzBuzz
+        {
+
+            public IFizzBuzzResult Calculate(IFizzBuzzNumber inputNumber)
+            {
+                StringBuilder sb = new StringBuilder();
+                if (new ModOperator(inputNumber, 5).Exact())
+                {
+                    new BuzzResult().Collect(sb);
+
+                }
+                if (new ModOperator(inputNumber, 3).Exact()) return new FizzResult();
+                return new NumberResult(inputNumber);
+            }
         }
     }
+
+
 
 
     
