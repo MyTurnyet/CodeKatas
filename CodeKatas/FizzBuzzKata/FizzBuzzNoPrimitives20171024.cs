@@ -1,7 +1,4 @@
-﻿using System;
-using System.Runtime.InteropServices.WindowsRuntime;
-using FluentAssertions;
-using FluentAssertions.Common;
+﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CodeKatas.FizzBuzzKata
