@@ -63,7 +63,7 @@ namespace CodeKatas.FizzBuzzKata
             bool Equals(object obj);
         }
 
-        public abstract class ReturnValue : IReturnValue
+        private abstract class ReturnValue : IReturnValue
         {
             private readonly string _text;
 
@@ -78,14 +78,14 @@ namespace CodeKatas.FizzBuzzKata
             }
         }
 
-        public class FizzValue : ReturnValue
+        private class FizzValue : ReturnValue
         {
             public FizzValue() : base("Fizz")
             {
             }
         }
 
-        public class BuzzValue : ReturnValue
+        private class BuzzValue : ReturnValue
         {
             public BuzzValue() : base("Buzz")
             { }

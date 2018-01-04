@@ -50,7 +50,8 @@ namespace CodeKatas.FizzBuzzKata
             //assert
             buzz.Evaluate(input).Should().Be("fizzbuzz");
         }
-        public class FizzBuzz
+
+        private class FizzBuzz
         {
             public string Evaluate(int input)
             {
