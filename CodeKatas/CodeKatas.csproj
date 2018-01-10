@@ -67,6 +67,7 @@
     <Compile Include="BowlingGameKata\BowlingGameKata20170905.cs" />
     <Compile Include="BowlingGameKata\BowlingKata20170929.cs" />
     <Compile Include="BowlingGameKata\BowlingGame20171121.cs" />
+    <Compile Include="BowlingGameKata\BowlingGame20180105.cs" />
     <Compile Include="CompareTripletsKata\CompareTriplets0505.cs" />
     <Compile Include="CompareTripletsKata\CompareTriplets0509Mob.cs" />
     <Compile Include="CompareTripletsKata\CompareTriplets0606paired.cs" />
@@ -94,6 +95,7 @@
     <Compile Include="FizzBuzzKata\FizzBuzzNoPrimitives20171107.cs" />
     <Compile Include="FizzBuzzKata\FizzBuzzWithErnieTests.cs" />
     <Compile Include="FizzBuzzKata\KymetaTDDTests.cs" />
+    <Compile Include="FizzBuzzKata\FizzBuzz20180109.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringTowerKata\StringTower0510.cs" />
     <Compile Include="StringTowerKata\StringTower0626.cs" />
