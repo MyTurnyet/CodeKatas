@@ -103,6 +103,7 @@
     <Compile Include="StringTowerKata\StringTower0510.cs" />
     <Compile Include="StringTowerKata\StringTower0626.cs" />
     <Compile Include="StringTowerKata\StringTower0705.cs" />
+    <Compile Include="StringTowerKata\StringTowerFluentPractice20180215.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
