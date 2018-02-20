@@ -32,7 +32,7 @@ namespace CodeKatas.ShoppingCart
             decimal totalCost = cashRegister.TotalCost();
 
             //assert
-            totalCost.Should().Be((decimal) 0.50);
+            totalCost.Should().Be((decimal)0.50);
         }
         [TestMethod, TestCategory("Unit")]
         public void ShouldReturnPriceForBananas()
@@ -45,23 +45,23 @@ namespace CodeKatas.ShoppingCart
             decimal totalCost = cashRegister.TotalCost();
 
             //assert
-            totalCost.Should().Be((decimal) 0.30);
-        }
-    }
-
-    public class CashRegister   
-    {
-        private string _currentItem;
-
-        public void Scan(string skuCode)
-        {
-            _currentItem = skuCode;
+            totalCost.Should().Be((decimal)0.30);
         }
 
-        public decimal TotalCost()
+        private class CashRegister
         {
-            if (_currentItem == "B15") return 0.30m;
-            return 0.50m;
+            private string _currentItem;
+
+            public void Scan(string skuCode)
+            {
+                _currentItem = skuCode;
+            }
+
+            public decimal TotalCost()
+            {
+                if (_currentItem == "B15") return 0.30m;
+                return 0.50m;
+            }
         }
     }
 }
