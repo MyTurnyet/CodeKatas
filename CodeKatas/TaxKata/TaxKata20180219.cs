@@ -42,17 +42,18 @@ namespace CodeKatas.TaxKata
         public void ShouldReturnSalesTaxAs10Percent()
         {
             //arrange
-            ICartItem item = new TaxableItem(18.99);
+            ICartItem item = new Perfume();
 
             //assert
             item.Tax().Should().Be(1.90);
         }
 
+
         [TestMethod, TestCategory("Unit")]
         public void ShouldReturnCostAsPricePlusSalesTax()
         {
             //arrange
-            ICartItem item = new TaxableItem(18.99);
+            ICartItem item = new Perfume();
 
             //assert
             item.Cost().Should().Be(20.89);
@@ -62,10 +63,15 @@ namespace CodeKatas.TaxKata
         public void ShouldReturnCostAsPricePlusSalesTaxAndImportTax()
         {
             //arrange
-            ICartItem item = new ImportedTaxableItem(27.99);
+            ICartItem item = new ImportedPerfume();
 
             //assert
             item.Cost().Should().Be(32.19);
+        }
+
+        public class ImportedPerfume : ImportedTaxableItem
+        {
+            public ImportedPerfume() : base("Imported Bottle of Perfume", 27.99) { }
         }
 
         [TestMethod, TestCategory("Unit")]
@@ -134,44 +140,35 @@ namespace CodeKatas.TaxKata
             }
         }
 
-        private class TaxableItem : ICartItem
+        public class TaxableItem : ICartItem
         {
-            private readonly double _price;
+            private readonly string _name;
+            protected readonly double _price;
             private readonly SalesTax _tax;
 
-            private TaxableItem(double price, SalesTax tax)
+            private TaxableItem(string name, double price, SalesTax tax)
             {
+                _name = name;
                 _price = price;
                 _tax = tax;
             }
 
-            public TaxableItem(double price) : this(price, new SalesTax(price)) { }
-
-            public virtual double Tax()
-            {
-                return _tax.AssesedAmount();
-            }
-
-            public double Cost()
-            {
-                return Math.Round(_price + Tax(), 2);
-            }
+            protected TaxableItem(string name, double price) : this(name, price, new SalesTax(price)) { }
+            public virtual double Tax() => _tax.AssesedAmount();
+            public double Cost() => Math.Round(_price + Tax(), 2);
         }
 
-        private class ImportedTaxableItem : TaxableItem
+
+        public class Perfume : TaxableItem
         {
-            private readonly double _price;
+            public Perfume() : base("name", 18.99) { }
+        }
 
+        public class ImportedTaxableItem : TaxableItem
+        {
 
-            public ImportedTaxableItem(double price) : base(price)
-            {
-                _price = price;
-            }
-
-            public override double Tax()
-            {
-                return base.Tax() + new ImportTax(_price).AssesedAmount();
-            }
+            public ImportedTaxableItem(string name, double price) : base(name, price) { }
+            public override double Tax() => base.Tax() + new ImportTax(_price).AssesedAmount();
         }
 
         private interface ICartItem
@@ -183,7 +180,7 @@ namespace CodeKatas.TaxKata
         private class SalesTax
         {
             private readonly double _price;
-            
+
             public SalesTax(double price)
             {
                 _price = price;
