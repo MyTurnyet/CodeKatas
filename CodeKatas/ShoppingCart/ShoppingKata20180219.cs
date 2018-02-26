@@ -1,5 +1,7 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CodeKatas.ShoppingCart
 {
@@ -48,19 +50,117 @@ namespace CodeKatas.ShoppingCart
             totalCost.Should().Be((decimal)0.30);
         }
 
+        [TestMethod, TestCategory("Unit")]
+        public void ShouldReturnPriceForCantolope()
+        {
+            //arrange
+            CashRegister cashRegister = new CashRegister();
+            cashRegister.Scan("C40");
+
+            //act
+            decimal totalCost = cashRegister.TotalCost();
+
+            //assert
+            totalCost.Should().Be((decimal)0.60);
+        }
+
+
+        [TestMethod, TestCategory("Unit")]
+        public void ShouldReturnPriceForTomatoes()
+        {
+            //arrange
+            CashRegister cashRegister = new CashRegister();
+            cashRegister.Scan("T34");
+
+            //act
+            decimal totalCost = cashRegister.TotalCost();
+
+            //assert
+            totalCost.Should().Be((decimal)0.99);
+        }
+
+        [TestMethod, TestCategory("Unit")]
+        public void ShouldMultipleItemsShouldTotal()
+        {
+            //arrange
+            CashRegister cashRegister = new CashRegister();
+            cashRegister.Scan("T34");
+            cashRegister.Scan("C40");
+
+            //act
+            decimal totalCost = cashRegister.TotalCost();
+
+            //assert
+            totalCost.Should().Be((decimal)1.59);
+        }
+        
+
+        private class StoreItem
+        {
+            private readonly string _code;
+            private readonly decimal _cost;
+
+            public StoreItem(string code, decimal cost)
+            {
+                _code = code;
+                _cost = cost;
+            }
+
+            public override bool Equals(object obj)
+            {
+                return Equals(obj as StoreItem);
+            }
+
+            private bool Equals(StoreItem other)
+            {
+                return other != null && other._code == _code;
+            }
+
+            public decimal Cost()
+            {
+                return _cost;
+            }
+        }
+
+        private class Tomato : StoreItem
+        {
+            public Tomato() : base("T34", 0.99m){}
+        } 
+        private class Bananas : StoreItem
+        {
+            public Bananas() : base("B15", 0.30m){}
+        }
+        private class Cantolope : StoreItem
+        {
+            public Cantolope() : base("C40", 0.60m){}
+        }
+        private class Apple : StoreItem
+        {
+            public Apple() : base("A99", 0.50m){}
+        }
+
         private class CashRegister
         {
-            private string _currentItem;
+            private readonly List<StoreItem> _storeItems;
+
+            public CashRegister() : this(new List<StoreItem>()) { }
+
+            private CashRegister(List<StoreItem> storeItems)
+            {
+                _storeItems = storeItems;
+            }
 
             public void Scan(string skuCode)
             {
-                _currentItem = skuCode;
+                if (skuCode == "T34") _storeItems.Add(new Tomato());
+                if (skuCode == "B15") _storeItems.Add(new Bananas());
+                if (skuCode == "C40") _storeItems.Add(new Cantolope());
+                if (skuCode == "A99") _storeItems.Add(new Apple());
             }
 
             public decimal TotalCost()
             {
-                if (_currentItem == "B15") return 0.30m;
-                return 0.50m;
+                return _storeItems.Sum(item => item.Cost());
             }
         }
     }
