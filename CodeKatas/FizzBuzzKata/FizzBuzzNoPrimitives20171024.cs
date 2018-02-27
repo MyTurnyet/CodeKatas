@@ -76,6 +76,11 @@ namespace CodeKatas.FizzBuzzKata
             {
                 return (ReturnValue)obj != null && _text == ((ReturnValue)obj)._text;
             }
+
+            public override int GetHashCode()
+            {
+                return (_text != null ? _text.GetHashCode() : 0);
+            }
         }
 
         private class FizzValue : ReturnValue

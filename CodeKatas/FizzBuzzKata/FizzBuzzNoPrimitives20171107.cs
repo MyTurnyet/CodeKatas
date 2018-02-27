@@ -47,19 +47,6 @@ namespace CodeKatas.FizzBuzzKata
             result.Should().Be(new TextObj("Buzz"));
         }
 
-        //[TestMethod, TestCategory("Unit")]
-        //public void ShouldReturnFizzBuzzForNumberDivisiblyBy3And5()
-        //{
-        //    //arrange
-        //    FizzBuzz1107 fizzBuzz = new FizzBuzz1107(15);
-
-        //    //act
-        //    string result = fizzBuzz.Result();
-
-        //    //assert
-        //    result.Should().Be("fizzbuzz");
-        //}
-
         private class TextObj
         {
             private readonly string _text;
@@ -70,6 +57,11 @@ namespace CodeKatas.FizzBuzzKata
             {
                 TextObj textObj = (TextObj) obj;
                 return textObj != null && _text == textObj._text;
+            }
+
+            public override int GetHashCode()
+            {
+                return _text.GetHashCode();
             }
         }
 
@@ -87,7 +79,6 @@ namespace CodeKatas.FizzBuzzKata
                 return new TextObj(_numberToCalculate.ToString());
             }
 
-            private bool IsFizzBuzzy() => IsFizzy() && IsBuzzy();
             private bool IsBuzzy() => _numberToCalculate % 5 == 0;
             private bool IsFizzy() => _numberToCalculate % 3 == 0;
         }

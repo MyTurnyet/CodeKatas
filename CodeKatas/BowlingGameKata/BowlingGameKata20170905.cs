@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
 
 namespace CodeKatas.BowlingGameKata
 {
@@ -33,7 +33,7 @@ namespace CodeKatas.BowlingGameKata
         }
         #endregion ball tests
 
-        #region Score tests
+        #region TotalScore tests
         [TestMethod, TestCategory("Unit")]
         public void ShouldReturnScoreObjectWithScore0()
         {
@@ -41,7 +41,7 @@ namespace CodeKatas.BowlingGameKata
             Ball ball1 = new Ball(0);
 
             //act
-            Score score = ball1.Score();
+            Score score = ball1.TotalScore();
 
             //assert
             score.Should().Be(new Score(0));
@@ -57,7 +57,7 @@ namespace CodeKatas.BowlingGameKata
             //assert
             score1.Should().NotBe(score2);
         }
-        #endregion Score tests
+        #endregion TotalScore tests
 
         #region Frame tests
         /// <summary>
@@ -72,7 +72,7 @@ namespace CodeKatas.BowlingGameKata
             RegularFrame frame = new RegularFrame(ball1, ball2);
             Score score2 = new Score(7);
             //act
-            Score frameScore = frame.Score();
+            Score frameScore = frame.TotalScore();
 
             //assert
             frameScore.Should().Be(score2);
@@ -113,7 +113,7 @@ namespace CodeKatas.BowlingGameKata
             Score expectedScore = new Score(13);
             frame1.AddNextFrame(frame2);
             //act
-            Score actualScore = frame1.Score();
+            Score actualScore = frame1.TotalScore();
             //assert
             actualScore.Should().Be(expectedScore);
         }
@@ -127,7 +127,7 @@ namespace CodeKatas.BowlingGameKata
             Score expectedScore = new Score(17);
             frame1.AddNextFrame(frame2);
             //act
-            Score actualScore = frame1.Score();
+            Score actualScore = frame1.TotalScore();
             //assert
             actualScore.Should().Be(expectedScore);
         }
@@ -139,7 +139,7 @@ namespace CodeKatas.BowlingGameKata
             frame1.AddBonusBalls(new BonusBall(10), new BonusBall(5));
             Score expectedScore = new Score(25);
             //act
-            Score actualScore = frame1.Score();
+            Score actualScore = frame1.TotalScore();
             //assert
             actualScore.Should().Be(expectedScore);
         }
@@ -153,7 +153,7 @@ namespace CodeKatas.BowlingGameKata
             frame1.AddBonusBalls(new BonusBall(10), new BonusBall(5));
             Score expectedScore = new Score(16);
             //act
-            Score actualScore = frame1.Score();
+            Score actualScore = frame1.TotalScore();
             //assert
             actualScore.Should().Be(expectedScore);
         }
@@ -200,7 +200,7 @@ namespace CodeKatas.BowlingGameKata
             IFrame frame2 = new RegularFrame(new Ball(3), new Ball(3));
             game.AddFrame(frame1);
             game.AddFrame(frame2);
-            AddFramesWithScore(game, 8, 0);
+            AddFramesWithScore(game, 8);
             Score expectedScore = new Score(19);
 
             //act
@@ -262,7 +262,7 @@ namespace CodeKatas.BowlingGameKata
             void AddNextFrame(IFrame nextFrame);
             bool IsSpare();
             bool IsStrike();
-            Score Score();
+            Score TotalScore();
             Score GetBonusScore(IFrame frame);
             void AddBonusBalls(BonusBall bonusBall1, BonusBall bonusBall2);
         }
@@ -286,7 +286,7 @@ namespace CodeKatas.BowlingGameKata
                 for (int frameNumber = 0; frameNumber < _frames.Count; frameNumber++)
                 {
                     var frame = _frames[frameNumber];
-                    totalScore += frame.Score();
+                    totalScore += frame.TotalScore();
                 }
                 return totalScore;
             }
@@ -300,10 +300,11 @@ namespace CodeKatas.BowlingGameKata
             public void AddNextFrame(IFrame nextFrame) => _nextFrame = nextFrame;
             public bool IsSpare() => false;
             public bool IsStrike() => true;
-            public Score Score()
+
+            Score IFrame.TotalScore()
             {
                 Score score = AddNextFrameBonus();
-                return _ball.Score() + score;
+                return _ball.TotalScore() + score;
             }
 
             private Score AddNextFrameBonus()
@@ -314,7 +315,7 @@ namespace CodeKatas.BowlingGameKata
 
             private Score BonusBallScore()
             {
-                return _bonusBall.Score() + _bonusBall2.Score();
+                return _bonusBall.TotalScore() + _bonusBall2.TotalScore();
             }
 
             public Score GetBonusScore(IFrame frame)
@@ -336,16 +337,17 @@ namespace CodeKatas.BowlingGameKata
             private BonusBall _bonusBall;
             private BonusBall _bonusBall2;
 
+
             public SpareFrame(Ball ball1, Ball ball2)
             {
-                if (!Equals(ball1.Score() + ball2.Score(), new Score(10))) throw new ArgumentException("The score of two balls in rolled in a spare frame must be 10");
+                if (!Equals(ball1.TotalScore() + ball2.TotalScore(), new Score(10))) throw new ArgumentException("The score of two balls in rolled in a spare frame must be 10");
                 _ball1 = ball1;
                 _ball2 = ball2;
             }
 
-            public Score Score()
+            public Score TotalScore()
             {
-                return _ball1.Score() + _ball2.Score() + _nextFrame.GetBonusScore(this);
+                return _ball1.TotalScore() + _ball2.TotalScore() + _nextFrame.GetBonusScore(this);
             }
 
             public Score GetBonusScore(IFrame frame)
@@ -375,8 +377,8 @@ namespace CodeKatas.BowlingGameKata
                 _ball2 = ball2;
             }
 
-            public Score Score() => _ball1.Score() + _ball2.Score();
-            public Score GetBonusScore(IFrame frame) => frame.IsSpare() ? _ball1.Score() : Score();
+            public Score TotalScore() => _ball1.TotalScore() + _ball2.TotalScore();
+            public Score GetBonusScore(IFrame frame) => frame.IsSpare() ? _ball1.TotalScore() : TotalScore();
             public void AddBonusBalls(BonusBall bonusBall1, BonusBall bonusBall2) { }
             public bool IsSpare() => false;
             public void AddNextFrame(IFrame nextFrame) => _nextFrame = nextFrame;
@@ -393,7 +395,6 @@ namespace CodeKatas.BowlingGameKata
             }
 
             public override bool Equals(object obj) => obj != null && _points.Equals(((Score)obj)._points);
-            protected bool Equals(Score other) => _points == other._points;
             public override int GetHashCode() => _points;
             public static Score operator +(Score firstScore, Score secondScore) => new Score(firstScore._points + secondScore._points);
         }
@@ -407,10 +408,9 @@ namespace CodeKatas.BowlingGameKata
                 _pinsHit = pinsHit;
             }
 
-            public override bool Equals(object other) => other != null && this._pinsHit.Equals(((Ball)other)._pinsHit);
-            protected bool Equals(Ball other) => _pinsHit == other._pinsHit;
+            public override bool Equals(object other) => other != null && _pinsHit.Equals(((Ball)other)._pinsHit);
             public override int GetHashCode() => _pinsHit;
-            public Score Score() => new Score(_pinsHit);
+            public Score TotalScore() => new Score(_pinsHit);
         }
         private class BonusBall : Ball
         {

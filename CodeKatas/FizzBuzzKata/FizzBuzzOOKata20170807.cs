@@ -1,6 +1,6 @@
-﻿using System.Text;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Text;
 
 namespace CodeKatas.FizzBuzzKata
 {
@@ -34,19 +34,6 @@ namespace CodeKatas.FizzBuzzKata
 
             //assert
             actualResult.Equals(expectedResult).Should().BeTrue();
-        }
-        [TestMethod, TestCategory("Unit")]
-        public void ShouldReturnFizzForMultipleOfFive()
-        {
-            //arrange
-            IFizzBuzz fizzBuzz = new FizzBuzz();
-            IFizzBuzzNumber inputNumber = new FizzBuzzNumber(5);
-            IFizzBuzzResult expectedResult = new BuzzResult();
-            //act
-            IFizzBuzzResult actualResult = fizzBuzz.Calculate(inputNumber);
-
-            //assert
-         //   actualResult.Equals(expectedResult).Should().BeTrue();
         }
 
         private interface IModOperator { }
@@ -85,8 +72,10 @@ namespace CodeKatas.FizzBuzzKata
             {
                 _origin = origin;
             }
-            private bool Equals(FizzBuzzResult other) => other._origin.Equals(this._origin);
+            private bool Equals(FizzBuzzResult other) => other._origin.Equals(_origin);
             public override bool Equals(object obj) => obj is FizzBuzzResult && Equals((FizzBuzzResult)obj);
+
+            public override int GetHashCode() => (_origin != null ? _origin.GetHashCode() : 0);
 
             public virtual void Collect(StringBuilder sb)
             {
@@ -103,7 +92,8 @@ namespace CodeKatas.FizzBuzzKata
             {
                 _origin = origin;
             }
-            private bool Equals(FizzBuzzNumber other) => other._origin.Equals(this._origin);
+            public override int GetHashCode() => _origin.GetHashCode();
+            private bool Equals(FizzBuzzNumber other) => other._origin.Equals(_origin);
             public override bool Equals(object obj) => obj is FizzBuzzNumber && Equals((FizzBuzzNumber)obj);
             public string AsString() => _origin.ToString();
             public int AsInt()
