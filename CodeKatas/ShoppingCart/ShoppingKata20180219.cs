@@ -111,6 +111,14 @@ namespace CodeKatas.ShoppingCart
                 return Equals(obj as StoreItem);
             }
 
+            public override int GetHashCode()
+            {
+                unchecked
+                {
+                    return ((_code != null ? _code.GetHashCode() : 0) * 397) ^ _cost.GetHashCode();
+                }
+            }
+
             private bool Equals(StoreItem other)
             {
                 return other != null && other._code == _code;
