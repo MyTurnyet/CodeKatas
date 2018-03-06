@@ -103,6 +103,7 @@
     <Compile Include="FizzBuzzKata\FizzBuzzKataGroups20180220.cs" />
     <Compile Include="FizzBuzzKata\FizzBuzzKataInterviewBorey20180222.cs" />
     <Compile Include="FizzBuzzKata\FizzBuzzKC20180227.cs" />
+    <Compile Include="FizzBuzzKata\R.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShoppingCart\ShoppingKata20180219.cs" />
     <Compile Include="StringTowerKata\StringTower0510.cs" />
