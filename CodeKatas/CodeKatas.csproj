@@ -70,7 +70,6 @@
     <Compile Include="BowlingGameKata\BowlingGame20180105.cs" />
     <Compile Include="BowlingGameKata\IBall.cs" />
     <Compile Include="BowlingGameKata\Iball1.cs" />
-    <Compile Include="BowlingGameKata\BowlingGame20180227.cs" />
     <Compile Include="CompareTripletsKata\CompareTriplets0505.cs" />
     <Compile Include="CompareTripletsKata\CompareTriplets0509Mob.cs" />
     <Compile Include="CompareTripletsKata\CompareTriplets0606paired.cs" />
