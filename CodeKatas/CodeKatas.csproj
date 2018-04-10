@@ -97,6 +97,7 @@
     <Compile Include="FizzBuzzKata\FizzBuzzNoPrimitives20171024.cs" />
     <Compile Include="FizzBuzzKata\FizzBuzzNoPrimitives20171107.cs" />
     <Compile Include="FizzBuzzKata\FizzBuzzWithErnieTests.cs" />
+    <Compile Include="FizzBuzzKata\KataPractice20180322A.cs" />
     <Compile Include="FizzBuzzKata\KymetaTDDTests.cs" />
     <Compile Include="FizzBuzzKata\FizzBuzz20180109.cs" />
     <Compile Include="FizzBuzzKata\CodeKataFluentLanguage20180214.cs" />
@@ -104,6 +105,9 @@
     <Compile Include="FizzBuzzKata\FizzBuzzKataInterviewBorey20180222.cs" />
     <Compile Include="FizzBuzzKata\FizzBuzzKC20180227.cs" />
     <Compile Include="FizzBuzzKata\R.cs" />
+    <Compile Include="FizzBuzzKata\katapractice20180322B.cs" />
+    <Compile Include="FizzBuzzKata\CodeKataPractice20180322C.cs" />
+    <Compile Include="FizzBuzzKata\Kata20180322.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShoppingCart\ShoppingKata20180219.cs" />
     <Compile Include="StringTowerKata\StringTower0510.cs" />
