@@ -60,30 +60,28 @@ namespace CodeKatas._100DoorsKata
 
             public void WalkDoors(int iterations)
             {
-                _allDoors = new List<Door>();
-                for (int currentDoor = 0; currentDoor < 100; currentDoor++)
-                {
-                    _allDoors.Add(new Door());
-                }
+                InitializeDoorList();
                 for (int currentIteration = 1; currentIteration <= iterations; currentIteration++)
                 {
-                    for (int currentIndex = 0; currentIndex < 100; currentIndex+= currentIteration)
+                    for (int currentIndex = 0; currentIndex < 100; currentIndex += currentIteration)
                     {
                         _allDoors[currentIndex].ChangeState();
                     }
                 }
             }
 
-            public int OpenDoorCount()
+            private void InitializeDoorList()
             {
-                return _allDoors.Count(door => door.IsOpen());
+                _allDoors = new List<Door>();
+                for (int currentDoor = 0; currentDoor < 100; currentDoor++) { _allDoors.Add(new Door()); }
             }
+            public int OpenDoorCount() => _allDoors.Count(door => door.IsOpen());
         }
 
         private class Door
         {
             private bool _stateIsOpen;
-            
+
             public Door() : this(false) { }
             public Door(bool stateIsOpen)
             {
