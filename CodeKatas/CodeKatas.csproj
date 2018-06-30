@@ -59,6 +59,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="100DoorsKata\HundredDoors20180629.cs" />
     <Compile Include="BowlingGameKata\BowlingGame0504.cs" />
     <Compile Include="BowlingGameKata\BowlingGame0606.cs" />
     <Compile Include="BowlingGameKata\BowlingKata0621.cs" />
